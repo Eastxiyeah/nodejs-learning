@@ -1,0 +1,2 @@
+Updating the DOM with plain JavaScript is very powerful but verbose
+使用纯 JavaScript 更新 DOM 非常强大但冗长
