@@ -5,13 +5,25 @@ const app = express();
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log('Hello from the middlware 🖖')
+  next()
+})
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next()
+})
+
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
 const getAllTours = (req, res) => {
+  console.log(req.requestTime)
   res.status(200).send({
     status: 'success',
+    requestAt: req.requestTime,
     results: tours.length,
     data: {
       tours,
@@ -103,3 +115,5 @@ const port = 3000;
 app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
+
+// the essence of Express development
